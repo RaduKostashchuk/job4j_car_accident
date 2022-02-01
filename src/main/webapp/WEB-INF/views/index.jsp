@@ -16,13 +16,26 @@
 </head>
 <body>
 <div class="container">
-    <p class="h5">Hello ${user}</p>
-    <table class="table table-striped" id="tablePosts">
+    <p class="h5">Нарушения ПДД</p>
+    <table class="table table-striped">
+        <thead class="table-light">
+        <tr>
+            <th>Название</th>
+            <th>Описание</th>
+            <th>Адрес</th>
+        </tr>
+        </thead>
         <tbody>
-        <c:forEach items="${data}" var="value">
+        <c:forEach items="${accidents}" var="accident">
             <tr>
                 <td>
-                    <c:out value="${value}"/>
+                    <c:out value="${accident.name}"/>
+                </td>
+                <td>
+                    <c:out value="${accident.description}"/>
+                </td>
+                <td>
+                    <c:out value="${accident.address}"/>
                 </td>
             </tr>
         </c:forEach>
