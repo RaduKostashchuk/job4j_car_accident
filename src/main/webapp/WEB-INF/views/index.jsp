@@ -12,17 +12,25 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"
             integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
 
-    <title>MVC</title>
+    <title>Нарушения ПДД</title>
 </head>
 <body>
 <div class="container">
-    <p class="h5">Нарушения ПДД</p>
+    <div class="row">
+        <div class="col-2">
+            <p class="h5 m-1">Нарушения ПДД</p>
+        </div>
+        <div class="col-2 offset-8">
+            <a class="btn btn-primary m-1" href="<c:url value='/create'/>">Добавить инцидент</a>
+        </div>
+    </div>
     <table class="table table-striped">
         <thead class="table-light">
         <tr>
             <th>Название</th>
             <th>Описание</th>
             <th>Адрес</th>
+            <th>Действие</th>
         </tr>
         </thead>
         <tbody>
@@ -36,6 +44,9 @@
                 </td>
                 <td>
                     <c:out value="${accident.address}"/>
+                </td>
+                <td>
+                    <a class="btn btn-primary m-1" href="<c:url value='/edit?id=${accident.id}'/>">Редактировать</a>
                 </td>
             </tr>
         </c:forEach>

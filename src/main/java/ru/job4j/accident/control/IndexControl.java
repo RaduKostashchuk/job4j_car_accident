@@ -10,13 +10,14 @@ import java.util.List;
 
 @Controller
 public class IndexControl {
+    private final AccidentMem store;
+
+    public IndexControl(AccidentMem store) {
+        this.store = store;
+    }
+
     @GetMapping("/")
     public String index(Model model) {
-        AccidentMem store = new AccidentMem();
-        Accident accident1 = Accident.of("Инцидент №1", "Превышение скорости", "Приморская 23");
-        Accident accident2 = Accident.of("Инцидент №2", "Парковка на газоне", "Есенина 45");
-        store.add(accident1);
-        store.add(accident2);
         List<Accident> accidents = store.getAllAccidents();
         model.addAttribute("accidents", accidents);
         return "index";

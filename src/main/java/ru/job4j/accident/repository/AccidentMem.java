@@ -11,12 +11,16 @@ import java.util.concurrent.ConcurrentHashMap;
 public class AccidentMem {
     private final Map<Integer, Accident> store = new ConcurrentHashMap<>();
 
-    public Accident add(Accident accident) {
+    public synchronized Accident add(Accident accident) {
        int id = store.keySet().stream().mapToInt(i -> i).max().orElse(1);
        id++;
        accident.setId(id);
        store.put(id, accident);
        return accident;
+    }
+
+    public synchronized void update(Accident accident) {
+        store.put(accident.getId(), accident);
     }
 
     public void remove(Accident accident) {
