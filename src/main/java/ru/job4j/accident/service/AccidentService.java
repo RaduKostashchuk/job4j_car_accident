@@ -27,15 +27,7 @@ public class AccidentService {
         return store.getAllAccidents();
     }
 
-    public List<AccidentType> getAllTypes() {
-        return store.getAllTypes();
-    }
-
-    public Accident findAccidentById(int id) {
+    public Accident findById(int id) {
         return store.findAccidentById(id);
-    }
-
-    public AccidentType findTypeById(int id) {
-        return store.findTypeById(id);
     }
 }

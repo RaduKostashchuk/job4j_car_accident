@@ -25,9 +25,18 @@
                     <input type='text' id="nameInput" name='name' placeholder="<c:out value='${accident.name}'/>">
                 </td>
                 <td>
-                    <select name="type.id">
+                    <label for="typeSelect">Тип:</label>
+                    <select name="type.id" id="typeSelect">
                         <c:forEach var="type" items="${types}">
                             <option value="${type.id}">${type.name}</option>
+                        </c:forEach>
+                    </select>
+                </td>
+                <td>
+                    <label for="ruleSelect">Статьи:</label>
+                    <select name="ruleIds" id="ruleSelect" multiple>
+                        <c:forEach var="rule" items="${rules}">
+                            <option value="${rule.id}">${rule.name}</option>
                         </c:forEach>
                     </select>
                 </td>

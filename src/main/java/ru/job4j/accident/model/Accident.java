@@ -1,6 +1,8 @@
 package ru.job4j.accident.model;
 
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 public class Accident {
     private int id;
@@ -8,6 +10,7 @@ public class Accident {
     private String description;
     private String address;
     private AccidentType type;
+    private final Set<Rule> rules = new HashSet<>();
 
     public static Accident of(String name, String description, String address, AccidentType type) {
         Accident accident = new Accident();
@@ -58,6 +61,18 @@ public class Accident {
         this.type = type;
     }
 
+    public Set<Rule> getRules() {
+        return rules;
+    }
+
+    public void addRule(Rule rule) {
+        rules.add(rule);
+    }
+
+    public void removeRule(Rule rule) {
+        rules.remove(rule);
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -83,6 +98,7 @@ public class Accident {
                 + ", description='" + description + '\''
                 + ", address='" + address + '\''
                 + ", type=" + type
+                + ", rules=" + rules
                 + '}';
     }
 }
