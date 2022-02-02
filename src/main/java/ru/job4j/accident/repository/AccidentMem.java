@@ -34,6 +34,10 @@ public class AccidentMem {
         store.remove(accident.getId());
     }
 
+    public Accident findById(int id) {
+        return store.get(id);
+    }
+
     public List<Accident> getAllAccidents() {
         return store.values().stream().toList();
     }

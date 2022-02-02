@@ -25,4 +25,8 @@ public class AccidentService {
     public List<Accident> getAllAccidents() {
         return store.getAllAccidents();
     }
+
+    public Accident findById(int id) {
+        return store.findById(id);
+    }
 }
