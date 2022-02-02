@@ -7,12 +7,14 @@ public class Accident {
     private String name;
     private String description;
     private String address;
+    private AccidentType type;
 
-    public static Accident of(String name, String description, String address) {
+    public static Accident of(String name, String description, String address, AccidentType type) {
         Accident accident = new Accident();
         accident.name = name;
         accident.description = description;
         accident.address = address;
+        accident.type = type;
         return accident;
     }
 
@@ -48,6 +50,14 @@ public class Accident {
         this.address = address;
     }
 
+    public AccidentType getType() {
+        return type;
+    }
+
+    public void setType(AccidentType type) {
+        this.type = type;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -72,6 +82,7 @@ public class Accident {
                 + ", name='" + name + '\''
                 + ", description='" + description + '\''
                 + ", address='" + address + '\''
+                + ", type=" + type
                 + '}';
     }
 }

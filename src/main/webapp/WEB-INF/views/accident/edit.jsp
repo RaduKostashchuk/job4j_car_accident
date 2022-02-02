@@ -20,11 +20,13 @@
     <form  action="<c:url value='/update'/>" method='POST'>
         <table>
             <tr>
-                <td>Название:</td>
                 <td>
-                    <input type='text' name='name' placeholder="<c:out value='${accident.name}'/>">
+                    <label for="nameInput">Название:</label>
+                    <input type='text' id="nameInput" name='name' placeholder="<c:out value='${accident.name}'/>">
                     <input type='hidden' name='id' value="${accident.id}">
                 </td>
+            </tr>
+            <tr>
                 <td><input name="submit" type="submit" value="Сохранить" /></td>
             </tr>
         </table>

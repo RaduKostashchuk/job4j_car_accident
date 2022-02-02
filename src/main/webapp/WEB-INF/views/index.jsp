@@ -30,6 +30,7 @@
             <th>Название</th>
             <th>Описание</th>
             <th>Адрес</th>
+            <th>Тип</th>
             <th>Действие</th>
         </tr>
         </thead>
@@ -44,6 +45,9 @@
                 </td>
                 <td>
                     <c:out value="${accident.address}"/>
+                </td>
+                <td>
+                    <c:out value="${accident.type.name}"/>
                 </td>
                 <td>
                     <a class="btn btn-primary m-1" href="<c:url value='/update?id=${accident.id}'/>">Редактировать</a>

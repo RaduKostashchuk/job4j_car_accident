@@ -20,8 +20,19 @@
     <form  action="<c:url value='/save'/>" method='POST'>
         <table>
             <tr>
-                <td>Название:</td>
-                <td><input type='text' name='name'></td>
+                <td>
+                    <label for="nameInput">Название:</label>
+                    <input type='text' id="nameInput" name='name' placeholder="<c:out value='${accident.name}'/>">
+                </td>
+                <td>
+                    <select name="type.id">
+                        <c:forEach var="type" items="${types}">
+                            <option value="${type.id}">${type.name}</option>
+                        </c:forEach>
+                    </select>
+                </td>
+            </tr>
+            <tr>
                 <td><input name="submit" type="submit" value="Сохранить" /></td>
             </tr>
         </table>
