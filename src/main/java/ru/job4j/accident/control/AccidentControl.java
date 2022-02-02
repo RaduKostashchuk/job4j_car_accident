@@ -5,14 +5,14 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import ru.job4j.accident.model.Accident;
-import ru.job4j.accident.repository.AccidentMem;
+import ru.job4j.accident.service.AccidentService;
 
 @Controller
 public class AccidentControl {
-    private final AccidentMem store;
+    private final AccidentService service;
 
-    public AccidentControl(AccidentMem store) {
-        this.store = store;
+    public AccidentControl(AccidentService service) {
+        this.service = service;
     }
 
     @GetMapping("/create")
@@ -27,13 +27,13 @@ public class AccidentControl {
 
     @PostMapping("/save")
     public String save(@ModelAttribute Accident accident) {
-        store.add(accident);
+        service.add(accident);
         return "redirect:/";
     }
 
     @PostMapping("/update")
     public String update(@ModelAttribute Accident accident) {
-        store.update(accident);
+        service.update(accident);
         return "redirect:/";
     }
 }
