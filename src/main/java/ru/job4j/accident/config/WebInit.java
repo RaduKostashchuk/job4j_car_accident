@@ -1,4 +1,4 @@
-package ru.job4j.accident;
+package ru.job4j.accident.config;
 
 import org.springframework.web.WebApplicationInitializer;
 import org.springframework.web.context.support.AnnotationConfigWebApplicationContext;

@@ -16,7 +16,7 @@
 </head>
 <body>
 <div class="container">
-    <p class="h5">Создать нарушение ПДД</p>
+    <p class="h5">Добавить нарушение ПДД</p>
     <form  action="<c:url value='/save'/>" method='POST'>
         <table>
             <tr>
