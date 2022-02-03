@@ -4,45 +4,33 @@ import org.springframework.stereotype.Service;
 import ru.job4j.accident.model.Accident;
 import ru.job4j.accident.model.AccidentType;
 import ru.job4j.accident.model.Rule;
-import ru.job4j.accident.repository.AccidentMem;
-import ru.job4j.accident.repository.RuleMem;
-import ru.job4j.accident.repository.TypeMem;
+import ru.job4j.accident.repository.AccidentJdbcTemplate;
+import ru.job4j.accident.repository.RuleJdbcTemplate;
+import ru.job4j.accident.repository.TypeJdbcTemplate;
 
 import java.util.List;
 
 @Service
 public class AccidentService {
-    private final AccidentMem accidents;
-    private final TypeMem types;
-    private final RuleMem rules;
+    private final AccidentJdbcTemplate accidents;
+    private final TypeJdbcTemplate types;
+    private final RuleJdbcTemplate rules;
 
-    public AccidentService(AccidentMem accidents, TypeMem types, RuleMem rules) {
+    public AccidentService(AccidentJdbcTemplate accidents,
+                           TypeJdbcTemplate types,
+                           RuleJdbcTemplate rules) {
         this.accidents = accidents;
         this.types = types;
         this.rules = rules;
     }
 
     public Accident add(Accident accident, String[] ruleIds) {
-        AccidentType type = types.findById(accident.getType().getId());
-        accident.setType(type);
-        for (String el : ruleIds) {
-            Rule rule = rules.findById(Integer.parseInt(el));
-            accident.addRule(rule);
-        }
-        return accidents.add(accident);
-    }
-
-    public AccidentType add(AccidentType type) {
-        return types.add(type);
-    }
-
-    public Rule add(Rule rule) {
-        return rules.add(rule);
+        accident = accidents.save(accident, ruleIds);
+        return accident;
     }
 
     public void update(Accident accident) {
-        Accident original = accidents.findById(accident.getId());
-        original.setName(accident.getName());
+        accidents.update(accident);
     }
 
     public List<Accident> getAllAccidents() {
