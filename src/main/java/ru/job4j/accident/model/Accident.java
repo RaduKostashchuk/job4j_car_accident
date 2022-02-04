@@ -1,15 +1,23 @@
 package ru.job4j.accident.model;
 
+import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
+@Entity
 public class Accident {
+    @Id
+    @GeneratedValue
     private int id;
     private String name;
     private String description;
     private String address;
+
+    @ManyToOne(fetch = FetchType.LAZY)
     private AccidentType type;
+
+    @ManyToMany
     private final Set<Rule> rules = new HashSet<>();
 
     public static Accident of(String name, String description, String address, AccidentType type) {

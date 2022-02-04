@@ -4,28 +4,27 @@ import org.springframework.stereotype.Service;
 import ru.job4j.accident.model.Accident;
 import ru.job4j.accident.model.AccidentType;
 import ru.job4j.accident.model.Rule;
-import ru.job4j.accident.repository.AccidentJdbcTemplate;
-import ru.job4j.accident.repository.RuleJdbcTemplate;
-import ru.job4j.accident.repository.TypeJdbcTemplate;
+import ru.job4j.accident.repository.*;
 
 import java.util.List;
 
 @Service
 public class AccidentService {
-    private final AccidentJdbcTemplate accidents;
-    private final TypeJdbcTemplate types;
-    private final RuleJdbcTemplate rules;
+    private final AccidentHbm accidents;
+    private final TypeHbm types;
+    private final RuleHbm rules;
 
-    public AccidentService(AccidentJdbcTemplate accidents,
-                           TypeJdbcTemplate types,
-                           RuleJdbcTemplate rules) {
+    public AccidentService(AccidentHbm accidents, TypeHbm types, RuleHbm rules) {
         this.accidents = accidents;
         this.types = types;
         this.rules = rules;
     }
 
     public Accident add(Accident accident, String[] ruleIds) {
-        accident = accidents.save(accident, ruleIds);
+        for (String ruleId : ruleIds) {
+            accident.addRule(rules.findById(Integer.parseInt(ruleId)));
+        }
+        accident = accidents.save(accident);
         return accident;
     }
 

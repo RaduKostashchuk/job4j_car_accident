@@ -16,13 +16,13 @@
 </head>
 <body>
 <div class="container">
-    <p class="h5">Редактировать нарушение ПДД №<c:out value="${accident.id}"/></p>
+    <p class="h5">Редактировать нарушение ПДД №<c:out value="${accident.id}"/> <c:out value="${accident.name}"/></p>
     <form  action="<c:url value='/update'/>" method='POST'>
         <table>
             <tr>
                 <td>
                     <label for="nameInput">Название:</label>
-                    <input type='text' id="nameInput" name='name' placeholder="<c:out value='${accident.name}'/>">
+                    <input type='text' id="nameInput" name='name' placeholder="Название">
                     <input type='hidden' name='id' value="${accident.id}">
                 </td>
             </tr>

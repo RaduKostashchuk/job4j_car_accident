@@ -1,11 +1,16 @@
 package ru.job4j.accident.model;
 
-import org.springframework.context.annotation.Scope;
-import org.springframework.stereotype.Component;
-
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
 import java.util.Objects;
 
+@Entity
+@Table(name = "type")
 public class AccidentType {
+    @Id
+    @GeneratedValue
     private int id;
     private String name;
 
