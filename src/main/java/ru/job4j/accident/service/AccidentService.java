@@ -10,41 +10,46 @@ import java.util.List;
 
 @Service
 public class AccidentService {
-    private final AccidentHbm accidents;
-    private final TypeHbm types;
-    private final RuleHbm rules;
+    private final AccidentRepository accidents;
+    private final TypeRepository types;
+    private final RuleRepository rules;
 
-    public AccidentService(AccidentHbm accidents, TypeHbm types, RuleHbm rules) {
+    public AccidentService(AccidentRepository accidents, TypeRepository types, RuleRepository rules) {
         this.accidents = accidents;
         this.types = types;
         this.rules = rules;
     }
 
-    public Accident add(Accident accident, String[] ruleIds) {
+    public Accident save(Accident accident, String[] ruleIds) {
         for (String ruleId : ruleIds) {
-            accident.addRule(rules.findById(Integer.parseInt(ruleId)));
+            Rule rule = rules.findById(Integer.parseInt(ruleId)).orElse(null);
+            if (rule != null) {
+                accident.addRule(rule);
+            }
         }
         accident = accidents.save(accident);
         return accident;
     }
 
     public void update(Accident accident) {
-        accidents.update(accident);
+        Accident original = accidents.findById(accident.getId()).get();
+        original.setName(accident.getName());
+        accidents.save(original);
     }
 
     public List<Accident> getAllAccidents() {
-        return accidents.getAll();
+        return accidents.findAll();
     }
 
     public List<AccidentType> getAllTypes() {
-        return types.getAll();
+        return (List<AccidentType>) types.findAll();
     }
 
     public List<Rule> getAllRules() {
-        return rules.getAll();
+        return (List<Rule>) rules.findAll();
     }
 
     public Accident findAccidentById(int id) {
-        return accidents.findById(id);
+        return accidents.findById(id).get();
     }
 }

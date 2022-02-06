@@ -13,35 +13,35 @@ import javax.servlet.http.HttpServletRequest;
 
 @Controller
 public class AccidentControl {
-    private final AccidentService accidentService;
+    private final AccidentService service;
 
-    public AccidentControl(AccidentService accidentService) {
-        this.accidentService = accidentService;
+    public AccidentControl(AccidentService service) {
+        this.service = service;
     }
 
     @GetMapping("/create")
     public String create(Model model) {
-        model.addAttribute("types", accidentService.getAllTypes());
-        model.addAttribute("rules", accidentService.getAllRules());
+        model.addAttribute("types", service.getAllTypes());
+        model.addAttribute("rules", service.getAllRules());
         return "accident/create";
     }
 
     @GetMapping("/update")
     public String edit(@RequestParam int id, Model model) {
-        model.addAttribute("accident", accidentService.findAccidentById(id));
+        model.addAttribute("accident", service.findAccidentById(id));
         return "accident/edit";
     }
 
     @PostMapping("/save")
     public String save(@ModelAttribute Accident accident, HttpServletRequest request) {
         String[] ruleIds = request.getParameterValues("ruleIds");
-        accidentService.add(accident, ruleIds);
+        service.save(accident, ruleIds);
         return "redirect:/";
     }
 
     @PostMapping("/update")
     public String update(@ModelAttribute Accident accident) {
-        accidentService.update(accident);
+        service.update(accident);
         return "redirect:/";
     }
 }
