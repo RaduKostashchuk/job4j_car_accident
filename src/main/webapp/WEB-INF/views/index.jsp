@@ -24,7 +24,10 @@
             <a class="btn btn-primary m-1" href="<c:url value='/create'/>">Добавить инцидент</a>
         </div>
         <div class="col-2">
-            <p>Вы зашли как: ${user.username}</p>
+            <p>${user.username} | <a href="<c:url value='/logout'/>">Выйти</a></p>
+        </div>
+        <div class="col-1">
+            <p>Выйти</p>
         </div>
     </div>
     <table class="table table-striped">
