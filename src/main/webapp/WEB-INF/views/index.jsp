@@ -20,8 +20,11 @@
         <div class="col-2">
             <p class="h5 m-1">Нарушения ПДД</p>
         </div>
-        <div class="col-2 offset-8">
+        <div class="col-2 offset-6">
             <a class="btn btn-primary m-1" href="<c:url value='/create'/>">Добавить инцидент</a>
+        </div>
+        <div class="col-2">
+            <p>Вы зашли как: ${user.username}</p>
         </div>
     </div>
     <table class="table table-striped">
